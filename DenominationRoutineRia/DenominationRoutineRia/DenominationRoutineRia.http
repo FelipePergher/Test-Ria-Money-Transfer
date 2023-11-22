@@ -1,0 +1,6 @@
+@DenominationRoutineRia_HostAddress = https://localhost:44345
+
+GET {{DenominationRoutineRia_HostAddress}}/Denomination/Get
+Accept: application/json
+
+###
