@@ -12,12 +12,12 @@ namespace DenominationRoutineRia.Controllers
     public class DenominationController : ControllerBase
     {
         private readonly ILogger<DenominationController> _logger;
-        private readonly IApplicationService _applicationService;
+        private readonly IApplication _application;
 
-        public DenominationController(ILogger<DenominationController> logger, IApplicationService applicationService)
+        public DenominationController(ILogger<DenominationController> logger, IApplication application)
         {
             _logger = logger;
-            _applicationService = applicationService;
+            _application = application;
         }
 
         [HttpGet("Get")]
@@ -25,7 +25,7 @@ namespace DenominationRoutineRia.Controllers
         {
             try
             {
-                var denominations = _applicationService.RunAllCases();
+                var denominations = _application.RunAllCases();
                 return Ok(denominations);
             }
             catch (Exception e)

@@ -2,35 +2,45 @@
 // Copyright (c) Felipe Pergher. All Rights Reserved.
 // </copyright>
 
-using DenominationRoutineRia.DTOs.Out;
 using DenominationRoutineRia.Interfaces;
+using DenominationRoutineRia.Models.DTOs.In;
+using DenominationRoutineRia.Models.DTOs.Out.Services;
 
 namespace DenominationRoutineRia.Services
 {
     public class DenominationService : IDenominationService
     {
-        public DenominationOutDto GetPossibilities(double amount)
+        public List<DenominationServiceOutDto> GetPossibilities(DenominationServiceInDto denominationServicedInDto)
         {
-            var result = new DenominationOutDto
-            {
-                Amount = amount
-            };
+            var denomination = new List<DenominationServiceOutDto>();
 
-            // TODO calculate the possibilities
-            result.Possibilities.Add(GetPossibilities1(amount));
+            GetPossibilitiesLogic(denominationServicedInDto.Amount, denominationServicedInDto.AvailableCash.OrderBy(x => x).ToList(), new(), denomination, 0);
 
-            return result;
+            return denomination;
         }
 
-        private DenominationOutItemDto GetPossibilities1(double amount)
+        private void GetPossibilitiesLogic(double amount, List<double> availableCash, List<double> currentPossibilities, List<DenominationServiceOutDto> denomination, int index)
         {
-            var result = new DenominationOutItemDto
+            if (amount == 0)
             {
-                Quantity = 1
-            };
+                denomination.Add(new DenominationServiceOutDto { CashValues = currentPossibilities.ToList() });
+                return;
+            }
 
-            // TODO calculate the possibilities
-            return result;
+            for (var i = index; i < availableCash.Count; i++)
+            {
+                var cashValue = availableCash[i];
+                if (amount >= cashValue)
+                {
+                    currentPossibilities.Add(cashValue);
+
+                    var currentCash = amount - cashValue;
+                    GetPossibilitiesLogic(currentCash, availableCash, currentPossibilities, denomination, i);
+
+                    // Remove the last item from the list
+                    currentPossibilities.RemoveAt(currentPossibilities.Count - 1);
+                }
+            }
         }
     }
 }
