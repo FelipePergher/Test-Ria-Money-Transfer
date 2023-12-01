@@ -14,5 +14,7 @@ namespace CustomerManagement.Interfaces
         public void SaveCustomers(List<Customer> customers);
 
         public List<Customer> GetCustomers();
+
+        public Task<string> TestCustomerAddLogic();
     }
 }

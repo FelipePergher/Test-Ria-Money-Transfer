@@ -10,13 +10,13 @@ namespace CustomerManagement.Services
 {
     public class CustomerService : ICustomerService
     {
-        // Todo move to AppSettings
-        private const string CustomerJsonFile = "data.json";
+        private readonly string _customerJsonFile;
         private readonly ILogger<CustomerService> _logger;
 
-        public CustomerService(ILogger<CustomerService> logger)
+        public CustomerService(ILogger<CustomerService> logger, IConfiguration config)
         {
             _logger = logger;
+            _customerJsonFile = config.GetValue<string>("customerFileName") ?? "customersFallback.json";
         }
 
         public void SaveCustomers(List<Customer> customers)
@@ -34,16 +34,16 @@ namespace CustomerManagement.Services
         private void SaveCustomersInFile(List<Customer> customers)
         {
             var jsonData = JsonSerializer.Serialize(customers);
-            File.WriteAllText(CustomerJsonFile, jsonData);
+            File.WriteAllText(_customerJsonFile, jsonData);
         }
 
         private List<Customer> GetCustomersFromFile()
         {
             try
             {
-                if (File.Exists(CustomerJsonFile))
+                if (File.Exists(_customerJsonFile))
                 {
-                    var fileJson = File.ReadAllText(CustomerJsonFile);
+                    var fileJson = File.ReadAllText(_customerJsonFile);
                     var customers = JsonSerializer.Deserialize<List<Customer>>(fileJson);
                     return customers ?? new List<Customer>();
                 }

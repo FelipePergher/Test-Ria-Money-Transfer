@@ -8,6 +8,14 @@ namespace CustomerManagement.Models.DTOs
 {
     public record CustomerRequestInDto
     {
+        public CustomerRequestInDto(string firstName, string lastName, int age, int? id)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Age = age;
+            Id = id;
+        }
+
         [Required]
         public string FirstName { get; set; }
 

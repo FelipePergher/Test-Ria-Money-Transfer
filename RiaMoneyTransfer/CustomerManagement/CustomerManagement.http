@@ -1,8 +1,12 @@
 @CustomerManagement_HostAddress = https://localhost:44362
 
+###
 GET {{CustomerManagement_HostAddress}}/customer/getAll/
 Accept: application/json
 
+###
+GET {{CustomerManagement_HostAddress}}/customer/TestCustomerAddLogic/
+Accept: application/json
 
 ###
 POST {{CustomerManagement_HostAddress}}/customer/batchAdd/
@@ -11,15 +15,33 @@ Content-Type: application/json
 
 [
     {
-    "firstName": "Jose",
-    "lastName": "Larsen",
-    "age": 18,
-    "id": 2
+        "firstName": "Sara",
+        "lastName": "Powell",
+        "age": 25,
+        "id": 4
+    }    ,
+    {
+        "firstName": "Jose",
+        "lastName": "Powell",
+        "age": 25,
+        "id": 5
     },
     {
-    "firstName": "Lukas",
-    "lastName": "lane",
-    "age": 25,
-    "id": 3
+        "firstName": "Jose",
+        "lastName": "Larsen",
+        "age": 18,
+        "id": 2
+    },
+    {
+        "firstName": "Lukas",
+        "lastName": "lane",
+        "age": 25,
+        "id": 3
+    },
+    {
+        "firstName": "Tomas",
+        "lastName": "Chan",
+        "age": 25,
+        "id": 1
     }
 ]

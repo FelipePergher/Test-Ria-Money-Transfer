@@ -55,5 +55,11 @@ namespace CustomerManagement.Controllers
 
             return Ok(_application.GetCustomers());
         }
+
+        [HttpGet("TestCustomerAddLogic")]
+        public async Task<IActionResult> TestCustomerAddLogic()
+        {
+            return Ok(await _application.TestCustomerAddLogic());
+        }
     }
 }
