@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddScoped<IDenominationService, DenominationService>();
 
-builder.Services.AddScoped<IApplication, Application>();
+builder.Services.AddSingleton<IApplication, Application>();
 
 builder.Services.AddControllers();
 
