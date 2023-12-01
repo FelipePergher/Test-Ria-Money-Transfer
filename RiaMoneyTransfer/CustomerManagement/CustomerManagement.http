@@ -1,0 +1,25 @@
+@CustomerManagement_HostAddress = https://localhost:44362
+
+GET {{CustomerManagement_HostAddress}}/customer/getAll/
+Accept: application/json
+
+
+###
+POST {{CustomerManagement_HostAddress}}/customer/batchAdd/
+Accept: application/json
+Content-Type: application/json
+
+[
+    {
+    "firstName": "Jose",
+    "lastName": "Larsen",
+    "age": 18,
+    "id": 2
+    },
+    {
+    "firstName": "Lukas",
+    "lastName": "lane",
+    "age": 25,
+    "id": 3
+    }
+]
